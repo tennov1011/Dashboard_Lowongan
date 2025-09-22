@@ -249,6 +249,23 @@ class ApplicantService {
 			return {};
 		}
 	}
+
+	/**
+	 * Get all applicants (simplified for reporting)
+	 */
+	async getAllApplicants() {
+		console.log('Getting all applicants for reporting...');
+		
+		try {
+			const endpoint = '/items/job_applications?fields=id,fullName,email,appliedJobId,applicationStatus,date_created&sort=-date_created&limit=-1';
+			const result = await this.request(endpoint);
+			console.log('All applicants response:', result);
+			return result;
+		} catch (error) {
+			console.error('Error fetching all applicants:', error);
+			throw error;
+		}
+	}
 }
 
 export const applicantService = new ApplicantService();
